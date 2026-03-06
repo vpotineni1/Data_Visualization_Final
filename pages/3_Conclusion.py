@@ -27,10 +27,10 @@ streeteasy_data = streeteasy_data()
 
 
 st.write("The previous chart highlights how uneven the housing recovery was across community districts. While " \
-"some neighborhoods returned to pre-pandemic rent levels relatively quickly, others took signficantly longer to recover." \
-"These differences in rent recovery also have important implications for housing affordability. The chart below" \
-"examines how rent burdens have changed across distrcits by comparing rents relative to local incomes before and" \
-"after the pandemic.")
+" some neighborhoods returned to pre-pandemic rent levels relatively quickly, others took signficantly longer to recover." \
+" These differences in rent recovery also have important implications for housing affordability. The chart below" \
+" examines how rent burdens have changed across distrcits by comparing rents relative to local incomes before and" \
+" after the pandemic.")
 
 st.header("Figure 7: Changes in Housing Affordability Varied Across Income Levels")
 
