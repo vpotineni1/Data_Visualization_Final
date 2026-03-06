@@ -63,5 +63,5 @@ st.caption("In Figure 2, the baseline is still 2019, to allow for an apples to a
 
 
 st.write("COVID-19 had proved to be an economic shock to the New York City housing market. It had caused rent price levels to decrease, while increasing supply of rent properties. With that being said, " \
-"it would be interesting to delve deeper into this shock. While these charts display the overall effect of the pandemic, it would be interesting to udnerstand the effects of the COVID-19 pandemic on the housing market" \
+"it would be interesting to delve deeper into this shock. While these charts display the overall effect of the pandemic, it would be interesting to understand the effects of the COVID-19 pandemic on the housing market" \
 "at the community district level. ")
