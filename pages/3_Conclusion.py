@@ -32,7 +32,7 @@ st.write("The previous chart highlights how uneven the housing recovery was acro
 "examines how rent burdens have changed across distrcits by comparing rents relative to local incomes before and" \
 "after the pandemic.")
 
-st.header("Figure 7: Chnages in Housing Affordability Varied Across Income Levels")
+st.header("Figure 7: Changes in Housing Affordability Varied Across Income Levels")
 
 st.altair_chart(rent_burden_visualization(rental_data, streeteasy_data, housing_data,income_data), use_container_width=True)
 
