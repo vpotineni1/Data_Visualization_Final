@@ -38,7 +38,7 @@ st.caption(" NEED TO DO: THIS CAPTION WILL BE A SHORT DESCRIPTION OF THE GRAPH, 
 st.header("Figure 4: NEED TO INSERT A RANKED BAR CHART THAT DISPLAYS WHICH DISTRICTS TOOK THE LONGEST AND SHORTEST TO RECOVER")
 
 st.write("The previous figures show that the effects of COVID-19 on New York City's rental market were far from uniform. Some community districts experienced sharp" \
-" rent declines followed by strong recoveries, while others saw weaker rebounds. This raisses an important question: what explains these differences across neighborhoods? One possible" \
+" rent declines followed by strong recoveries, while others saw weaker rebounds. This raises an important question: what explains these differences across neighborhoods? One possible" \
 " explanation lies in the socioeconomic characteristics of each district. In particular, poverty levels may influence how quickly and the magnitude to which housing markets recover" \
 " from economic shocks.")
 
