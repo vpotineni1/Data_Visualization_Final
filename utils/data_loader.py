@@ -12,7 +12,7 @@ def rental_data():
 
 @st.cache_data
 def mapping_data():
-    community_districts = pd.read_csv("data/nycd.shp")
+    community_districts = gpd.read_file("data/nycd.shp")
     community_districts = community_districts.to_crs(epsg=4326)
     community_districts['BoroCD'] = community_districts['BoroCD'].astype(int)
     return community_districts
