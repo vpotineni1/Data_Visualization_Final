@@ -30,7 +30,7 @@ st.write("The previous chart highlights how uneven the housing recovery was acro
 
 st.header("Figure 7: Changes in Housing Affordability Varied Across Community Districts")
 
-st.altair_chart(rent_burden_visualization(rental_data, income_data), use_container_width=True)
+st.altair_chart(rent_burden_visualization(rental_data, streeteasy_data,income_data), use_container_width=True)
 
 st.caption("Note: Income from 2019 is used for both periods to isolate the effect of rent changes on housing affordability")
 
