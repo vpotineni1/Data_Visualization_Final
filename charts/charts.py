@@ -49,9 +49,9 @@ def pre_covid_trends_chart(rental_data: pd.DataFrame) -> alt.Chart:
     select2 = alt.selection_point(fields = ['borough'])
 
     
-    chart= alt.Chart(chart_data, title = 'Before the Pandemic, NYC Rental Prices and Inventory were Stable Across NYC Boroughs').mark_line().encode(
+    chart= alt.Chart(chart_data, title = 'NYC Rental Market was Stable Pre-Pandemic').mark_line().encode(
         x = alt.X('date:T', title = 'Month'),
-        y = alt.Y("value:Q", scale = alt.Scale(zero = False), title = 'Index (Baseline = 1)'),
+        y = alt.Y("value:Q", scale = alt.Scale(zero = False), title = 'Price/Inventory Index (2019 = 1)'),
         color = alt.Color('borough:N', title = 'Borough'),
         tooltip = [alt.Tooltip('borough:N', title = 'Borough'), alt.Tooltip('date:T', title = 'Month'), alt.Tooltip('value:Q', title = 'Index', format ='.2f' )],
         opacity = alt.condition(select2, alt.value(1), alt.value(0.2)),).add_params(select, select2).transform_filter(select).properties(width = 700, height = 400)
@@ -97,7 +97,7 @@ def post_covid_trends_chart(rental_data: pd.DataFrame) -> alt.Chart:
 
     structural_line = (alt.Chart(chart_data,  title = 'COVID-19 Triggered a Sharp Shock in NYC Rental Prices and Inventory').mark_line().encode(
         x=alt.X('date:T', title = 'Month'),
-        y=alt.Y('value:Q', scale = alt.Scale(zero = False), title = 'Index (Baseline = 1)' ),
+        y=alt.Y('value:Q', scale = alt.Scale(zero = False), title = 'Price/Inventory Index (2019 = 1)' ),
         color=alt.Color('borough:N'),
         tooltip = [alt.Tooltip('borough:N', title = 'Borough'), alt.Tooltip('date:T', title = 'Month'), alt.Tooltip('value:Q', title = 'Index', format ='.2f' )],
         opacity = alt.condition(select2, alt.value(1), alt.value(0.2)),).add_params(select, select2).transform_filter(select).properties(width = 700, height = 400)
@@ -106,7 +106,6 @@ def post_covid_trends_chart(rental_data: pd.DataFrame) -> alt.Chart:
     chart = structural_line + line_covid + covid_text
 
     return chart
-
 
 def choropleth_data_transformation(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, housing_data:pd.DataFrame) -> pd.DataFrame:
     df = rental_data.copy()
@@ -161,22 +160,26 @@ def choropleth(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, housing
     input_dropdown = alt.binding_radio(options=options, labels=labels , name='Metric: ')
     select = alt.selection_point(fields = ['metric'], bind = input_dropdown, value = [{'metric': "decline_2019_2020"}])
 
+    geo_features = mapping_data.__geo_interface__["features"]
+    for feature in geo_features:
+        feature["properties"]["communityDistrict"] = int(feature["properties"]["BoroCD"])
+
     CD_select = alt.selection_point(fields = ['communityDistrict'])
     
-    choropleth = alt.Chart(alt.Data(values=mapping_data.__geo_interface__["features"])).mark_geoshape(stroke="black",strokeWidth=0.5).transform_lookup(lookup = 'properties.BoroCD',
+    choropleth = alt.Chart(alt.Data(values=geo_features)).mark_geoshape(stroke="black",strokeWidth=0.5).transform_lookup(lookup = 'properties.BoroCD',
                                                                                           from_ = alt.LookupData(chart_data, key = 'communityDistrict', fields = options + ['communityDistrict'])
                                                                  ).transform_fold(options, as_ = ['metric', 'value']).transform_filter(select).encode(
                                                                      color = alt.Color('value:Q', title = '% Change', scale = alt.Scale(scheme = 'redblue'), legend = alt.Legend(orient = 'left', format ='.0%' )),
                                                                      opacity = alt.condition(CD_select, alt.value(1), alt.value(0.2)),
-                                                                     tooltip = [alt.Tooltip("properties.BoroCD:N", title = 'District'), alt.Tooltip("metric:N", title = "Metric"), alt.Tooltip("value:Q", format = ".2%", title = 'Value')]).add_params(select).project(type = 'albers').properties(width = 600, height = 600)
+                                                                     tooltip = [alt.Tooltip("properties.BoroCD:N", title = 'District'), alt.Tooltip("metric:N", title = "Metric"), alt.Tooltip("value:Q", format = ".2%", title = 'Value')]).add_params(select, CD_select).project(type = 'albers').properties(width = 600, height = 600)
     
     scatter = alt.Chart(chart_data).mark_circle(size = 100).encode(
         x = alt.X('decline_2019_2020:Q', title = "% Decline in Rent Price from 2019 - 2020", axis = alt.Axis(format = '%')),
         y = alt.Y('recovery_2020_2022:Q', title = '% Rent Recovery from 2020 - 2022', axis = alt.Axis(format = '%')),
-        color = alt.condition(CD_select, alt.value("red"), alt.value("lightgray")),
-            tooltip = alt.Tooltip('communityDistrict:N')).add_params(CD_select).properties(width = 400, height = 400)
+        opacity = alt.condition(CD_select, alt.value(1), alt.value(0.2)),
+        tooltip = alt.Tooltip('communityDistrict:N')).add_params(CD_select).properties(width = 600, height = 600)
     
-    chart = (choropleth | scatter).properties(title =  alt.TitleParams(text = "Rent Declines and Recoveries Varied Widely Across NYC Community Districts", anchor = 'middle'))
+    chart = (choropleth | scatter)
 
     return chart
 
@@ -228,7 +231,7 @@ def scatter_poverty(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, ho
 
     chart2_final = chart2 + xline + yline
 
-    chart_final = (chart1_final | chart2_final).properties(title =  alt.TitleParams(text = "Districs with Higher Poverty Rates Saw Weaker Rent Recovery after COVID, which is Made Clear in the Quadrant Plot", anchor = 'middle'))
+    chart_final = (chart1_final | chart2_final)
     
     return chart_final
 
@@ -263,15 +266,22 @@ def choropleth_mapping(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame,
                 tooltip = [alt.Tooltip('communityDistrict:N', title = 'District'), alt.Tooltip('completion_rate:Q', format = '.2%', title = 'Completion Rate' )]
             ).project(type = 'albers').add_params(CD_select).properties(width = 400, height = 500)
     
+    line = alt.Chart(choropleth_data).transform_regression("completion_rate", "recovery_2020_2022").mark_line(color = 'black').encode(
+        x = "completion_rate:Q",
+        y = "recovery_2020_2022:Q"
+    )
+    
     scatter = alt.Chart(choropleth_data).mark_circle(size = 80).encode(
         x = alt.X("completion_rate:Q", title = '% Housing Completion Rate (2020 - 2022)',  axis = alt.Axis(format = '%')),
         y = alt.Y("recovery_2020_2022", title = '% Rental Recovery (2020 - 2022)',  axis = alt.Axis(format = '%')),
         color = alt.Color("recovery_group:N", scale = alt.Scale(domain = ['Strong Recovery', 'Weak Recovery', 'Other'], range = ['blue', 'red', 'gray']), legend = alt.Legend(title = 'Recovery Group')),
         opacity = alt.condition(CD_select, alt.value(1), alt.value(0.2)),
         tooltip = [alt.Tooltip('communityDistrict:N', title = 'District'), alt.Tooltip("completion_rate:Q", format=".1%", title = 'Completion Rate'), alt.Tooltip("recovery_2020_2022:Q", format=".2%", title = '% Rent Recovery')]
-        ).properties(width = 400, height = 400)
+        ).properties(width = 600, height = 600)
     
-    chart = (choropleth | scatter).properties(title =  alt.TitleParams(text = "Neighborhoods with Less New Housing Often Saw Weaker Rent Recovery ", anchor = 'middle'))
+    scatter = scatter + line
+
+    chart = (choropleth | scatter)
     return chart
     
 
@@ -306,45 +316,46 @@ def rent_burden_transformation(rental_data: pd.DataFrame, streeteasy_data: pd.Da
     return income_rent
     
 
-def rent_burden_visualization(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, income_data:pd.DataFrame) -> alt.Chart:
+def rent_burden_visualization(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, income_data:pd.DataFrame, housing_data:pd.DataFrame) -> alt.Chart:
+
+    recovery_data = choropleth_data_transformation(rental_data, streeteasy_data, housing_data)
 
     income_rent = rent_burden_transformation(rental_data, streeteasy_data, income_data)
+    
+    income_rent = income_rent.merge(recovery_data[['communityDistrict', 'recovery_2020_2022']], on = 'communityDistrict', how = 'left')
+
+    top5_districts = [101,303, 305, 306, 201]
+    bottom5_districts = [112,111,210,407,403]
+
+    income_rent['recovery_group'] = 'Other'
+    income_rent.loc[income_rent['communityDistrict'].isin(top5_districts),'recovery_group'] = 'Strong Recovery'
+    income_rent.loc[income_rent['communityDistrict'].isin(bottom5_districts),'recovery_group'] = 'Weak Recovery'
 
     top10 = income_rent.sort_values('change', ascending=False).head(10)
     filter_out = ~income_rent['communityDistrict'].isin(top10['communityDistrict'].tolist())
     outside_10 = income_rent[filter_out]
 
-    base_scatter = alt.Chart(outside_10).mark_circle(size = 80).encode(
-        x = alt.X('Median_Household_Income_x:Q', title='Median Household Income $ (Baseline: 2019)'),
-        y= alt.Y('change:Q', title='Change in Rent-to-Income Ratio (2022 - 2019)', axis = alt.Axis(format = '%')),
-        tooltip=[alt.Tooltip('communityDistrict:N', title='District')], 
-        color = alt.value('lightgrey'))
-
-    scatter = alt.Chart(income_rent).mark_circle(size=80).encode(
-         x=alt.X('medianAskingRent_x:Q', title='Median Household Income (baseline)'),
-        y=alt.Y('change:Q', title='Change in Rent-to-Income Ratio (2022 – 2019)'),
-        tooltip=[alt.Tooltip('communityDistrict:N', title='District'),]).properties(width=700, height=450, title='Affordability Change vs Income by District')
+    base_scatter = alt.Chart(income_rent).mark_circle(size = 80).encode(
+        x = alt.X('recovery_2020_2022:Q', title='% Rent Recovery  (2022 - 2020)', axis = alt.Axis(format = '%')),
+        y= alt.Y('change:Q', title='Change in Rent-to-Income Ratio (2022 - 2020)', axis = alt.Axis(format = '%')),
+        tooltip=[alt.Tooltip('communityDistrict:N', title='District'), alt.Tooltip('change:Q', title = '% Change in Rent Burden', format='.1%'), alt.Tooltip("recovery_2020_2022:Q", title = '% Rent Recovery', format = '.1%') ], 
+        color = alt.Color("recovery_group:N", scale = alt.Scale(domain = ['Strong Recovery', 'Weak Recovery', 'Other'], range = ['blue', 'red', 'gray']), legend = alt.Legend(title = 'Recovery Group')),
+        )
     
-    bar_points = alt.Chart(top10).mark_circle(size = 200).encode(
-        x = alt.X('Median_Household_Income_x:Q', title='Median Household Income $ (Baseline: 2019)'),
-        y= alt.Y('change:Q', title='Change in Rent-to-Income Ratio (2022 - 2019)', axis = alt.Axis(format = '%')),
-        tooltip=[alt.Tooltip('communityDistrict:N', title='District')], 
-        color = alt.value('red'))
-    
-    trend = alt.Chart(income_rent).transform_regression('Median_Household_Income_x', 'change').mark_line().encode(
-        x = 'Median_Household_Income_x:Q',
+    trend = alt.Chart(income_rent).transform_regression('recovery_2020_2022', 'change').mark_line().encode(
+        x = 'recovery_2020_2022:Q',
         y = 'change:Q')
     
-    scatter = (base_scatter + bar_points + trend).properties(width = 500, height = 500)
-    
+    scatter = (base_scatter + trend).properties(width = 500, height = 500)
     
     bars = alt.Chart(top10).mark_bar().encode(
         x=alt.X('change:Q', title='Increase in Rent-to-Income',  axis = alt.Axis(format = '%')),
         y=alt.Y('communityDistrict:N', sort='-x', title='District'),
-        tooltip=['communityDistrict', alt.Tooltip('change:Q', format='.1%')]
+        color = alt.Color("recovery_group:N", scale = alt.Scale(domain = ['Strong Recovery', 'Weak Recovery', 'Other'], range = ['blue', 'red', 'gray']), legend = alt.Legend(title = 'Recovery Group')),
+        tooltip=[alt.Tooltip('communityDistrict'), alt.Tooltip('change:Q', title = '% Change in Rent Burden', format='.1%')]
         ).properties(width=650, height=500, title='Top 10 Districts Where Affordability Worsened Most')
 
-    full_chart = (scatter | bars).properties(title =  alt.TitleParams(text = "Neighborhoods with a Lower Median Income often had a Smaller Change in Rent Burden Ratio ", anchor = 'middle'))
+    full_chart = (scatter | bars)
     full_chart 
 
     return full_chart
@@ -385,10 +396,10 @@ def ranked_bar(rental_data: pd.DataFrame, streeteasy_data: pd.DataFrame, housing
     combined = pd.concat([top5,bottom5])
     
     chart = alt.Chart(combined).mark_bar().encode(
-        x = alt.X('metric:Q', title = 'Rent Recovery Ratio (2022/2019)', axis = alt.Axis(format = '.2f')),
+        x = alt.X('metric:Q', title = '2022 Rent Relative to 2019', axis = alt.Axis(format = '.2f')),
         y = alt.Y('communityDistrict:N', sort = '-x', title = 'Community District'),
         color = alt.Color('group:N', scale = alt.Scale(domain = ['Top Recovery', 'Weakest Recovery'], range = ['blue', 'red']), legend = alt.Legend(title = 'Recovery Group')),
         tooltip = [alt.Tooltip('communityDistrict:N', title = 'District'), alt.Tooltip('metric:Q', title = 'Recovery Ratio')]
-        ).properties(width = 650, height = 500, title = 'Top and Bottom Rental Market Recoveries Across NYC Districts')
+        ).properties(width = 650, height = 500)
     
     return chart
