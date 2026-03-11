@@ -43,7 +43,7 @@ st.caption("Figure 7 compares rent recovery between 2020 and 2022 with the chang
 " rent recovery also saw larger increases in rent burden. The bar chart identifies the ten districts where affordability worsened most.")
 
 st.write("Figure 7 reveals a clear and positive relationship between rent recovery and rent burden, as the stronger a district's" \
-" rent recovery, the larger the increase in its rent-to-income ratio. The ten districts where affordability worsened the most, all experienced" \
+" rent recovery, the larger the increase in its rent-to-income ratio. The ten districts where affordability worsened the most also experienced" \
 " above-average rent recovery. The two most extreme cases are districts 101 and 303. District 101 saw rent recovery of almost 90% " \
 " and a rent burden increase of nearly 29%. District 303 followed with a rent burden increase of approximately 17 percentage points. Notably," \
 " both of these districts were identified as strong recovery districts in Figure 4, confirming that the strongest rebounding neighborhoods " \
