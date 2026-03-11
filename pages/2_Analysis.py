@@ -30,7 +30,7 @@ st.title("Uneven Recovery Across New York City Community Districts")
 st.write("The previous section established that the COVID-19 pandemic caused a major shock to New York City neighborhoods. Rental prices quickly declined, while inventory levels rapidly increased." \
 " Following this shock, rental prices and inventory levels began to gradually recover. While examining borough-level trends is educational, it might hide important variations that occur within neighborhoods. In order" \
 " to examine neighborhood-level variation, the rest of the analysis will be focused on community districts. Community districts are administrative divisions of New York City, and offer an even deeper analysis into " \
-" rental market trends.. For example, some areas of the city may have experienced larger rent declines or slower recoveries than others." \
+" rental market trends. For example, some areas of the city may have experienced larger rent declines or slower recoveries than others." \
 " To understand how evenly the housing market recovered, we next examine changes in rental prices at the community district level. ")
 
 st.write("Note: Community Districts are three digit numbers, and the first digit corresponds to the borough they are in. 1 maps to the Bronx, 2 maps to Brooklyn, 3 maps to Manhattan, 4 maps to Queens, and 5 to Staten Island.")
@@ -45,7 +45,7 @@ st.header("Figure 3: Rent Declines and Recoveries Varied Widely Across Community
 st.altair_chart(choropleth(rental_data, streeteasy_data, housing_data, mapping_data), use_container_width=True)
 
 st.caption(" Figure 3 shows how rental price declines and subsequent recoveries varied across NYC community districts. The choropleth " \
-" map displays the percentage decline in rent rents between 2019 and 2020 and recovery between 2020 and 2022. The scatterplot compares" \
+" map displays the percentage decline in rent between 2019-2020 and recovery between 2020-2022. The scatterplot compares" \
 " each district's initial decline with the strength of its recovery between 2020 and 2022. Together, these visualizations highlight the " \
 " wide variation in rental market changes due to the economic shock caused by the pandemic. Moreover, this figure is interactive, so you can " \
 " click a district on the choropleth and it will highlight on the scatterplot. ")
@@ -132,7 +132,7 @@ st.write("Taken together, these results suggest that both socioeconomic vulnerab
 " recovery of New York City's rental market. Districts with lower poverty rates and more active housing construction tended to rebound more strongly" \
 " , while economically vulnerable districts with little new development lagged behind.")
 
-st.write("This raises a more fundamental question for residents: did stronger rent recovery actually make neighborhoods better or worse off in terms of affordability?" \
+st.write("This raises a more fundamental question: did stronger rent recovery actually make neighborhoods better or worse off in terms of affordability?" \
 " To isolate the direct effect of rent changes alone, the next section compares how rent burdens changed across districts between 2019 and 2022," \
-" holding household income constant at 2019 levels. This allows us to ask a precise question: purely as a result of how rent moved, did residents" \
+" holding household income constant at 2019 levels. This allows us to ask, purely as a result of how rent moved, whether residents" \
 " end up paying a larger or smaller share of their income on rent by 2022. ")

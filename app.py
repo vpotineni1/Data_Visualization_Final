@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-st.set_page_config(page_title="New York City Housing Market - Vishal Potineni, Mike Gladden, Rylan Kruep", layout="wide")
+st.set_page_config(page_title="New York City Housing Market", layout="wide")
 
 
 st.title("The Uneven Recovery of New York City's Rental Market After COVID-19")
@@ -42,7 +42,7 @@ st.write("A key metric that is used throughout this report is rent recovery, whi
 " saw rents remain closer to their pandemic lows by 2022.")
 
 st.write("With a few clarifications out of the way, we begin by examining borough-level rental trends before and after the pandemic, which establishes the baseline conditions and the scale of the shock" \
-" before zooming to community district differences in the analysis section.")
+" before zooming into differences on the community district level in the analysis section.")
 
 
 st.markdown("- - - ")

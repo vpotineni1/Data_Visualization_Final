@@ -19,11 +19,11 @@ st.markdown("The third dataset is the NYC Housing Devlopment Data from the NYC D
 " provides information on new housing construction and completion across New York City community districts. This dataset" \
 " was used to compute the housing completion rate for Figure 6. ")
 
-st.markdown("The fourth dataset is the Poverty Rates by Community Districts also from the NYC Department of City Planning." \
+st.markdown("The fourth dataset is the poverty rates by community districts also from the NYC Department of City Planning." \
 " This dataset was manually created as there was not one combined list online, so we had to manually go through the community districts" \
 " on the website and make the datset. ")
 
-st.markdown("The fifth dataset is median household income by Communtiy District which is from Keeping Track Online. Like the above, there was not " \
+st.markdown("The fifth dataset is median household income by communtiy district which is from Keeping Track Online. Like the above, there was not " \
 " a downloadable list, so we manually scraped the income data onto a .csv file. ")
 
 st.header("Metrics Calculated:")
@@ -37,7 +37,6 @@ st.write("Rent Recovery (2020-2022): Rent Recovery measures the percentage incre
 " and its median rent in 2022. This metric was calculated to capture the percentage by which rent recovered in the immediate aftermath of the pandemic.")
 st.write("Housing Completion Rate: The number of newly completed housing units between 2020 and 2022 divided by the existing housing stock in the district." \
 " This was metric was designed to capture the magnitude of housing development that occured during the recovery period.")
-
 
 
 st.header("References")
@@ -58,7 +57,9 @@ st.write("References for Articles:")
 
 st.markdown (" * Realini, D. P. (2025, November 15). How the Past Decade has Changed in the New York City Rental Market. Medium. https://medium.com/@paulrealini/how-the-past-decade-has-changed-in-the-new-york-city-rental-market-4b5a8e5e2a16")
 
-st.markdown ("Hubbard, K. (2020). New York City’s Falling Rents Reflect the Pain of COVID-19. US News & World Report; U.S. News & World Report. https://www.usnews.com/news/cities/articles/2020-10-15/new-york-citys-falling-rents-reflect-the-trauma-of-covid-19")
+st.markdown (" * Hubbard, K. (2020). New York City’s Falling Rents Reflect the Pain of COVID-19. US News & World Report; U.S. News & World Report. https://www.usnews.com/news/cities/articles/2020-10-15/new-york-citys-falling-rents-reflect-the-trauma-of-covid-19")
 
-st.markdown ("Lindy, J. (2024, August 21). Off The MRKT. Off the MRKT. https://www.offthemrkt.com/lifestyle/the-evolution-of-rental-prices-in-manhattan-over-the-last-decade")
+st.markdown (" * Lindy, J. (2024, August 21). Off The MRKT. Off the MRKT. https://www.offthemrkt.com/lifestyle/the-evolution-of-rental-prices-in-manhattan-over-the-last-decade")
+
+st.markdown (" * Rising Construction, Labor Costs Increase Rents, Contributing to the Affordable Housing Crisis. (2022, February 23). Www.novoco.com. https://www.novoco.com/notes-from-novogradac/rising-construction-labor-costs-increase-rents-contributing-affordable-housing-crisis")
 

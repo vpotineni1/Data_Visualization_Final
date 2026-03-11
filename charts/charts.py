@@ -336,7 +336,7 @@ def rent_burden_visualization(rental_data: pd.DataFrame, streeteasy_data: pd.Dat
     outside_10 = income_rent[filter_out]
 
     base_scatter = alt.Chart(income_rent).mark_circle(size = 80).encode(
-        x = alt.X('recovery_2020_2022:Q', title='% Rent Recovery  (2022 - 2020)', axis = alt.Axis(format = '%')),
+        x = alt.X('recovery_2020_2022:Q', title='% Rent Recovery  (2022 - 2019)', axis = alt.Axis(format = '%')),
         y= alt.Y('change:Q', title='Change in Rent-to-Income Ratio (2022 - 2020)', axis = alt.Axis(format = '%')),
         tooltip=[alt.Tooltip('communityDistrict:N', title='District'), alt.Tooltip('change:Q', title = '% Change in Rent Burden', format='.1%'), alt.Tooltip("recovery_2020_2022:Q", title = '% Rent Recovery', format = '.1%') ], 
         color = alt.Color("recovery_group:N", scale = alt.Scale(domain = ['Strong Recovery', 'Weak Recovery', 'Other'], range = ['blue', 'red', 'gray']), legend = alt.Legend(title = 'Recovery Group')),

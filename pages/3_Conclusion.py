@@ -22,11 +22,13 @@ income_data = income_data()
 streeteasy_data = streeteasy_data()
 
 
-st.write("The previous section established that the COVID-19 rental recovery was deeply uneven across New York City's" \
+st.title("Was Low Rent Recovery Beneficial?")
+
+st.write("Itt has now been established that the COVID-19 rental recovery was deeply uneven across New York City's" \
 " community districts. Two potential reasons for this were poverty rates and housing development. This " \
 " raises a more fundamental question of whether districts with weaker rent recovery actually benefit residents by keeping housing costs down?" \
 " To isolate the direct effect of rent changes, we compare how rent burdens changed across districts between 2019 and 2022, holding" \
-" household income constant at 2019 levels. If weaker recovery helped residents, we would expect those districts to show the " \
+" income constant at 2019 levels. If weaker recovery helped residents, we would expect those districts to show the " \
 " smallest increases in rent burden or even potential improvements in affordability.")
 
 st.header("Figure 7: Changes in Housing Affordability Varied Across Community Districts")
@@ -37,28 +39,27 @@ st.caption("Note: Income from 2019 is used for both periods to isolate the effec
 
 st.caption("Figure 7 compares rent recovery between 2020 and 2022 with the change in rent-to-income ratio between 2019 and 2022 for" \
 " each community district. Blue points indicate strong recovery districts, red points indicate weak recovery districts, and gray points" \
-" represent all other districts. The regression line shows a clear positive relationship as districts with stronger" \
-" rent recovery also saw larger increases in rent burden. The bar chart identifies the ten districts where affordability worsened most," \
-" all of which experienced above-average rent recovery.")
+" represent all other districts (as identified in Figure 4). The regression line shows a clear positive relationship as districts with stronger" \
+" rent recovery also saw larger increases in rent burden. The bar chart identifies the ten districts where affordability worsened most.")
 
-st.write("Figure 7 reveals a clear and positive relationship between rent recovery and rent burden increase, as the stronger a district's" \
-" rent recovery, the larger the increase in its rent-to-income ratio. The ten districts where affordability worsened most all experienced" \
+st.write("Figure 7 reveals a clear and positive relationship between rent recovery and rent burden, as the stronger a district's" \
+" rent recovery, the larger the increase in its rent-to-income ratio. The ten districts where affordability worsened the most, all experienced" \
 " above-average rent recovery. The two most extreme cases are districts 101 and 303. District 101 saw rent recovery of almost 90% " \
 " and a rent burden increase of nearly 29%. District 303 followed with a rent burden increase of approximately 17 percentage points. Notably," \
 " both of these districts were identified as strong recovery districts in Figure 4, confirming that the strongest rebounding neighborhoods " \
 " also experienced worsening affordability. ")
 
-st.write("In contrast, the weak recovery districts shown in red cluster near zero on both axes. Their rent recovery was very minimal and their rent burden" \
+st.write("In contrast, the weak recovery districts, shown in red, cluster near zero on both axes. Their rent recovery was very minimal and their rent burden" \
 " change was also near zero. District 407, for example, had a rent recovery of roughly 5% and saw virtually no change in rent burden. " \
-" On the surface this might appear to be a positive outcome for residents. However, this reflects stagnant market conditions rather than " \
+" On the surface this might appear to be a positive outcome for residents. However, this might reflect stagnant market conditions rather than " \
 " improved affordability. Rents in these districts remained depressed not because residents were protected, but because housing" \
 " demand never fully returned following the pandemic shock.")
 
 st.write("This reveals the double-edged nuance of New York City's uneven recovery. Weaker rent recovery did not mean better outcomes for residents. Rather, " \
 " especially as discussed in Figures 4 and 5, it signaled depressed demand, limited investment, and stunted economic activity. Meanwhile," \
-" stronger recovery came at a direct cost to residents in the form of higher rent burdens. The pandemic produced two distinct types of " \
-" hardship across the city. The first is high-income districts that became significantly less affordable, while lower-income districts remained" \
-" economically depressed. Both represent the main types of recovery that took place after the economic shock caused by the pandemic.")
+" stronger recovery came at a direct cost to residents in the form of higher rent burdens. From this, we can see that the pandemic produced two distinct types of " \
+" hardship across the city. First, high-income districts became significantly less affordable. Second, lower-income districts remained" \
+" economically depressed. Both represent the main types of recovery that took place in the short-term after the economic shock caused by the pandemic.")
 
 st.markdown("---")
 st.header("Conclusion")
@@ -78,8 +79,8 @@ st.write("When looking at the central question of this narrative, it is clear th
 st.write("One of the most nuanced findings of this report, however, was the affordability analysis. A weaker rent recovery did not translate into better outcomes" \
 " for residents in lower-income districts. While those neighborhoods avoided the largest increases in rent burden, this was not a sign of resilience. Rather, it" \
 " reflected depressed housing demand, limited investment, and stunted economic activity. Meanwhile, districts that recovered strongly saw rent burdens" \
-" rise sharply as rents outpaced incomes. The pandemic thus produced two outcomes. High-income districts became much less affordable, and lower-income districts" \
-" remained economically depressed. Both of these outcomes represent the lack of equitable recovery. ")
+" rise sharply. The pandemic thus produced two outcomes. High-income districts became much less affordable, and lower-income districts" \
+" remained economically depressed. Both of these outcomes represent the hardships that came as a result of the pandemic. ")
 
 
 st.markdown("Below are four limitations with regards to this analysis:")
