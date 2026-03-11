@@ -24,7 +24,7 @@ streeteasy_data = streeteasy_data()
 
 st.title("Was Low Rent Recovery Beneficial?")
 
-st.write("Itt has now been established that the COVID-19 rental recovery was deeply uneven across New York City's" \
+st.write("It has now been established that the COVID-19 rental recovery was deeply uneven across New York City's" \
 " community districts. Two potential reasons for this were poverty rates and housing development. This " \
 " raises a more fundamental question of whether districts with weaker rent recovery actually benefit residents by keeping housing costs down?" \
 " To isolate the direct effect of rent changes, we compare how rent burdens changed across districts between 2019 and 2022, holding" \
