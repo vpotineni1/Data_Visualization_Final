@@ -52,10 +52,10 @@ st.write("Figure 7 reveals a clear and positive relationship between rent recove
 st.write("In contrast, the weak recovery districts, shown in red, cluster near zero on both axes. Their rent recovery was very minimal and their rent burden" \
 " change was also near zero. District 407, for example, had a rent recovery of roughly 5% and saw virtually no change in rent burden. " \
 " On the surface this might appear to be a positive outcome for residents. However, this might reflect stagnant market conditions rather than " \
-" improved affordability. Rents in these districts remained depressed not because residents were protected, but because housing" \
+" improved affordability. Rents in these districts remained depressed not necessarily because residents were protected, but because housing" \
 " demand never fully returned following the pandemic shock.")
 
-st.write("This reveals the double-edged nuance of New York City's uneven recovery. Weaker rent recovery did not mean better outcomes for residents. Rather, " \
+st.write("This reveals the double-edged nuance of New York City's uneven recovery. Weaker rent recovery did not necessarily mean better outcomes for residents. Rather, " \
 " especially as discussed in Figures 4 and 5, it signaled depressed demand, limited investment, and stunted economic activity. Meanwhile," \
 " stronger recovery came at a direct cost to residents in the form of higher rent burdens. From this, we can see that the pandemic produced two distinct types of " \
 " hardship across the city. First, high-income districts became significantly less affordable. Second, lower-income districts remained" \
